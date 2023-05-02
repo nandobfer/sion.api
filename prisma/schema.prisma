@@ -1,0 +1,94 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model contracts {
+    id          Int      @id @default(autoincrement())
+    unit        String   @unique(map: "unit")
+    date        DateTime @db.Date
+    ip          String
+    pessoa      String   
+    supplier    String  
+    name        String
+    birth       DateTime @db.Date
+    email       String  
+    phone       String  
+    cep         String  
+    address     String  
+    district    String
+    number      String
+    city        String
+    state       String
+    cnpj        String?
+    company     String? 
+    category    String? 
+    cpf         String? 
+    rg          String?
+    filename    String?
+    signatures  String?   
+    seller      users    @relation(fields: [seller_id], references: [id])
+    seller_id   Int      
+    rdstation   rdstation?
+    omie        omie?
+    financial   financial?
+    logs        logs[]
+}
+
+model emails {
+    id    Int     @id @default(autoincrement())
+    email String?
+}
+
+model users {
+    id            Int       @id @default(autoincrement())
+    username      String    @unique
+    email         String    @unique
+    password      String
+    name          String
+    birth         DateTime  @db.Date
+    cpf           String    @default("02576698506")
+    adm           Boolean   @default(false)
+    ip            String    @default("0.0.0.0")
+    contracts     contracts[]
+    logs          logs[]
+}
+
+model financial {
+    id          Int         @id @default(autoincrement())
+    name        String 
+    phone       String 
+    email       String  
+    login       String?
+    password    String?
+    contract    contracts   @relation(fields: [contract_id], references: [id])
+    contract_id Int         @unique
+}
+
+model rdstation {
+    id          String      @unique
+    state       Int         @default(1)
+    contract    contracts   @relation(fields: [contract_id], references: [id])
+    contract_id Int         @unique
+}
+
+model omie {
+    id          String      @unique
+    bill        Int?
+    contract    contracts   @relation(fields: [contract_id], references: [id])
+    contract_id Int         @unique
+}
+
+model logs {
+    id              Int         @id @default(autoincrement())
+    date            DateTime    @default(now())
+    text            String      @db.Text
+    contract        contracts   @relation(fields: [contract_id], references: [id])
+    contract_id     Int          
+    seller          users       @relation(fields: [seller_id], references: [id])
+    seller_id       Int         
+}
