@@ -1,6 +1,6 @@
 import sys, json
 from pathlib import Path
-sys.path.append(str(Path("src/gdrive").resolve()))
+sys.path.append(str(Path("src/scripts/gdrive").resolve()))
 from gdrive import mkdir
 
 data = sys.argv[1]
