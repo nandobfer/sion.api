@@ -60,7 +60,7 @@ router.post("/unit", async (request, response, next) => {
 
     if (!contract) {
         const input = JSON.stringify(data).replaceAll('"', "'")
-        const command = `python3 src/sion/unit.py "${input}"`
+        const command = `python3 src/scripts/unit.py "${input}"`
         console.log(command)
         const output = execSync(command)
         console.log(output.toString())
@@ -139,7 +139,7 @@ router.post("/lead", async (request, response, next) => {
         input.mail_subject = "Sion - Novo lead"
         input.mail_list = [mails.leads]
 
-        exec(`python3 src/sion/send_mail.py "${JSON.stringify(input).replaceAll('"', "'")}"`, (error, stdout, stderr) => {
+        exec(`python3 src/scripts/send_mail.py "${JSON.stringify(input).replaceAll('"', "'")}"`, (error, stdout, stderr) => {
             console.log(error)
             console.log(stderr)
             console.log(stdout)
@@ -179,7 +179,7 @@ router.post("/send", async (request, response, next) => {
         data.signing = "client"
 
         const input = JSON.stringify(data).replaceAll('"', "'")
-        exec(`python3 src/sion/send_contract_mail.py "${input}"`, (error, stdout, stderr) => {
+        exec(`python3 src/scripts/send_contract_mail.py "${input}"`, (error, stdout, stderr) => {
             console.log(stdout)
             console.log(error)
             console.log(stderr)
@@ -305,14 +305,14 @@ router.post("/generate", async (request, response, next) => {
 
     // filling pdf form
     await fillForm({
-        pdfPath: `src/sion/templates/contract.${contract.pessoa}.pdf`,
+        pdfPath: `src/templates/contract.${contract.pessoa}.pdf`,
         outputPath: filename,
         font: { regular: "Poppins-Regular.ttf", bold: "Poppins-Bold.ttf" },
         fields,
     })
 
     const input = JSON.stringify(contract).replaceAll('"', "'")
-    exec(`python3 src/sion/upload.py "${input}"`, (error, stdout, stderr) => {
+    exec(`python3 src/scripts/upload.py "${input}"`, (error, stdout, stderr) => {
         console.log(stdout)
     })
 
@@ -379,7 +379,7 @@ router.post("/confirm", async (request, response, next) => {
         contract.template = "token"
         contract.mail_subject = contract.token + " - Token de autenticação - Sion - Contrato"
         const input = JSON.stringify(contract).replaceAll('"', "'")
-        exec(`python3 src/sion/send_mail.py "${input}"`, (error, stdout, stderr) => {
+        exec(`python3 src/scripts/send_mail.py "${input}"`, (error, stdout, stderr) => {
             console.log(stdout)
             console.log(error)
             console.log(stderr)
@@ -405,7 +405,7 @@ router.post("/confirm", async (request, response, next) => {
 
         const upload_input = JSON.stringify(contract).replaceAll('"', "'")
 
-        exec(`python3 src/sion/upload_file.py "${upload_input}"`, (error, stdout, stderr) => {
+        exec(`python3 src/scripts/upload_file.py "${upload_input}"`, (error, stdout, stderr) => {
             console.log(stdout)
         })
     }
@@ -446,7 +446,7 @@ router.post("/sign", async (request, response, next) => {
         console.log(`sending contract to ${data.mail_list}`)
         console.log("......")
         const input = JSON.stringify(data).replaceAll('"', "'")
-        exec(`python3 src/sion/send_contract_mail.py "${input}"`, (error, stdout, stderr) => {
+        exec(`python3 src/scripts/send_contract_mail.py "${input}"`, (error, stdout, stderr) => {
             console.log(stdout)
             console.log(error)
             console.log(stderr)
@@ -528,7 +528,7 @@ router.post("/sign", async (request, response, next) => {
         contract.upload_file = contract.filename
         const upload_input = JSON.stringify(contract).replaceAll('"', "'")
 
-        exec(`python3 src/sion/upload_file.py "${upload_input}"`, (error, stdout, stderr) => {
+        exec(`python3 src/scripts/upload_file.py "${upload_input}"`, (error, stdout, stderr) => {
             console.log(stdout)
             console.log(stderr)
         })
