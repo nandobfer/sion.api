@@ -8,4 +8,11 @@ router.get("/", async (request: Request, response: Response) => {
     response.json(contracts)
 })
 
+router.post("/id", async (request: Request, response: Response) => {
+    const data = request.body
+    const contract = await prisma.contracts.findUnique({ where: { id: Number(data.id) }, include: { seller: true } })
+
+    response.json(contract)
+})
+
 export default router
