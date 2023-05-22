@@ -5,6 +5,7 @@ const prisma = new PrismaClient()
 
 router.post("/", async (request: Request, response: Response) => {
     const data = request.body
+    console.log(data)
 
     const user = await prisma.users.findFirst({
         where: {
@@ -13,6 +14,7 @@ router.post("/", async (request: Request, response: Response) => {
                 password: data.password,
             },
         },
+        include: { contracts: true, logs: true },
     })
 
     response.json(user)
