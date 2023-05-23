@@ -70,6 +70,11 @@ model financial {
     contract_id Int         @unique
 }
 
+model settings {
+    id          Int         @id @default(autoincrement())
+    rate        Float       @default(1)
+}
+
 model rdstation {
     id          String      @unique
     state       Int         @default(1)
