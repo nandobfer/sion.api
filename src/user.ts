@@ -3,8 +3,9 @@ import { PrismaClient } from "@prisma/client"
 const router = express.Router()
 const prisma = new PrismaClient()
 
-router.post("/", async (request: Request, response: Response) => {
-    const data = request.body
+router.get("/", async (request: Request, response: Response) => {
+    const users = await prisma.users.findMany()
+    response.json(users)
 })
 
 router.post("/update", async (request: Request, response: Response) => {
