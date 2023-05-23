@@ -3,6 +3,11 @@ import { PrismaClient } from "@prisma/client"
 const router = express.Router()
 const prisma = new PrismaClient()
 
+router.get("/", async (request: Request, response: Response) => {
+    const settings = await prisma.settings.findFirst()
+    response.json(settings)
+})
+
 router.post("/rate", async (request: Request, response: Response) => {
     const data = request.body
 
