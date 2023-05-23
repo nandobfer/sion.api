@@ -14,7 +14,7 @@ router.post("/", async (request: Request, response: Response) => {
                 password: data.password,
             },
         },
-        include: { contracts: true, logs: true },
+        include: { contracts: true },
     })
 
     response.json(user)
