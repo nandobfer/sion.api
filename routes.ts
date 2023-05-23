@@ -4,10 +4,12 @@ import contract from "./src/contract"
 import signup from "./src/signup"
 import viacep from "./src/viacep"
 import contracts from "./src/contracts"
+import user from "./src/user"
 
 export const router = express.Router()
 
 router.use("/login", login)
+router.use("/user", user)
 router.use("/contract", contract)
 router.use("/contracts", contracts)
 // router.use("/signup", signup)
