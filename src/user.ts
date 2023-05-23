@@ -24,6 +24,7 @@ router.post("/update", async (request: Request, response: Response) => {
     const user = await prisma.users.update({
         data: { name: data.name, phone: data.phone },
         where: { id: data.id },
+        include: { contracts: { include: { seller: true } } },
     })
 
     response.json(user)
@@ -35,6 +36,7 @@ router.post("/password", async (request: Request, response: Response) => {
     const user = await prisma.users.update({
         data: { password: data.password },
         where: { id: data.id },
+        include: { contracts: { include: { seller: true } } },
     })
 
     response.json(user)
@@ -46,6 +48,7 @@ router.post("/email", async (request: Request, response: Response) => {
     const user = await prisma.users.update({
         data: { email: data.email },
         where: { id: data.id },
+        include: { contracts: { include: { seller: true } } },
     })
 
     response.json(user)
