@@ -8,6 +8,13 @@ router.get("/", async (request: Request, response: Response) => {
     response.json(users)
 })
 
+router.post("/id", async (request: Request, response: Response) => {
+    const data = request.body
+    const user = await prisma.users.findUnique({ where: { id: Number(data.id) }, include: { contracts: true } })
+
+    response.json(user)
+})
+
 router.post("/update", async (request: Request, response: Response) => {
     const data = request.body
 
