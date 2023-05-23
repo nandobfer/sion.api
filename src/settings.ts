@@ -11,8 +11,8 @@ router.get("/", async (request: Request, response: Response) => {
 router.post("/rate", async (request: Request, response: Response) => {
     const data = request.body
 
-    const rate = await prisma.settings.update({ data: { rate: Number(data.rate) }, where: { id: 1 } })
-    response.json(rate)
+    const settings = await prisma.settings.update({ data: { rate: Number(data.rate) }, where: { id: 1 } })
+    response.json(settings)
 })
 
 export default router
