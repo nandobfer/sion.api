@@ -50,6 +50,7 @@ model users {
     email         String    @unique
     password      String
     name          String
+    phone         String    @default("4134221864")
     birth         DateTime  @db.Date
     cpf           String    @default("02576698506")
     adm           Boolean   @default(false)
