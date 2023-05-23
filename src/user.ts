@@ -10,7 +10,10 @@ router.get("/", async (request: Request, response: Response) => {
 
 router.post("/id", async (request: Request, response: Response) => {
     const data = request.body
-    const user = await prisma.users.findUnique({ where: { id: Number(data.id) }, include: { contracts: true } })
+    const user = await prisma.users.findUnique({
+        where: { id: Number(data.id) },
+        include: { contracts: { include: { seller: true } } },
+    })
 
     response.json(user)
 })
