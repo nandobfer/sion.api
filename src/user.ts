@@ -4,7 +4,7 @@ const router = express.Router()
 const prisma = new PrismaClient()
 
 router.get("/", async (request: Request, response: Response) => {
-    const users = await prisma.users.findMany()
+    const users = await prisma.users.findMany({ include: { contracts: true } })
     response.json(users)
 })
 
