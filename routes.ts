@@ -10,6 +10,10 @@ import texts from "./src/texts"
 
 export const router = express.Router()
 
+router.get("/", (request, response: any) => {
+    response.json({ success: true })
+})
+
 router.use("/login", login)
 router.use("/user", user)
 router.use("/contract", contract)
