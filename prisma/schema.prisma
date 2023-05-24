@@ -111,6 +111,6 @@ model texts {
     section         Int
     text            String      @db.Text()
     date            DateTime    @default(now())
-    users           users       @relation(fields: [user_id], references: [id])
+    user            users       @relation(fields: [user_id], references: [id])
     user_id         Int
 }
