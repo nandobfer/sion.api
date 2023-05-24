@@ -6,6 +6,7 @@ import viacep from "./src/viacep"
 import contracts from "./src/contracts"
 import user from "./src/user"
 import settings from "./src/settings"
+import texts from "./src/texts"
 
 export const router = express.Router()
 
@@ -14,6 +15,7 @@ router.use("/user", user)
 router.use("/contract", contract)
 router.use("/contracts", contracts)
 router.use("/settings", settings)
+router.use("/texts", texts)
 // router.use("/signup", signup)
 
 router.post("/cep", (request, response, next) => {
