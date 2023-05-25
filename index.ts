@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from "express"
+import fileUpload from "express-fileupload"
 import dotenv from "dotenv"
 import cors from "cors"
 import { router } from "./routes"
@@ -16,6 +17,7 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
+app.use(fileUpload())
 app.use("/api", router)
 app.use("/static", express.static("static"))
 
