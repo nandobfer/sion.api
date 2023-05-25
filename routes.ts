@@ -7,6 +7,7 @@ import contracts from "./src/contracts"
 import user from "./src/user"
 import settings from "./src/settings"
 import texts from "./src/texts"
+import images from "./src/images"
 
 export const router = express.Router()
 
@@ -20,6 +21,7 @@ router.use("/contract", contract)
 router.use("/contracts", contracts)
 router.use("/settings", settings)
 router.use("/texts", texts)
+router.use("/images", images)
 // router.use("/signup", signup)
 
 router.post("/cep", (request, response, next) => {
