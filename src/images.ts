@@ -6,6 +6,11 @@ import fs from "fs"
 const router = express.Router()
 const prisma = new PrismaClient()
 
+router.get("/", async (request: Request, response: Response) => {
+    const images = await prisma.images.findMany()
+    response.json(images)
+})
+
 router.post("/update", async (request: any, response: Response) => {
     const data = JSON.parse(request.body.data)
     const file = request.files.file
@@ -21,7 +26,8 @@ router.post("/update", async (request: any, response: Response) => {
         }
     })
 
-    const filePath = join(static_dir, `${data.name}.${extension}`)
+    const new_filename = `${data.name}.${extension}`
+    const filePath = join(static_dir, new_filename)
 
     file.mv(filePath, (err: any) => {
         if (err) {
@@ -30,7 +36,9 @@ router.post("/update", async (request: any, response: Response) => {
         }
     })
 
-    response.json(`${data.name}.${extension}`)
+    const image = await prisma.images.update({ where: { id: data.id }, data: { src: new_filename } })
+
+    response.json(image)
 })
 
 export default router
