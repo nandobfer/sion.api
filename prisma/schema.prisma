@@ -114,3 +114,10 @@ model texts {
     user            users       @relation(fields: [user_id], references: [id])
     user_id         Int
 }
+
+model images {
+    id              Int         @id @default(autoincrement())
+    src             String      @db.Text
+    name            String
+    title           String
+}
