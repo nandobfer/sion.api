@@ -64,6 +64,7 @@ model users {
     contracts     contracts[]
     logs          logs[]
     texts         texts[]
+    images        images[]
 }
 
 model financial {
@@ -120,4 +121,8 @@ model images {
     src             String      @db.Text
     name            String
     title           String
+    date            DateTime    @default(now())
+    user            users       @relation(fields: [user_id], references: [id])
+    user_id         Int         @default(2)
+    size            String      @default("1280x720")
 }
