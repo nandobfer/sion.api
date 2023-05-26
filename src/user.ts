@@ -54,4 +54,27 @@ router.post("/email", async (request: Request, response: Response) => {
     response.json(user)
 })
 
+router.post("/new", async (request: Request, response: Response) => {
+    const data = request.body
+
+    const user = await prisma.users.create({
+        data: {
+            birth: data.birth,
+            email: data.email,
+            name: data.name,
+            password: data.password,
+            username: data.username,
+            address: data.address,
+            cep: data.cep,
+            cpf: data.cpf,
+            district: data.district,
+            number: data.number,
+            phone: data.phone,
+            rg: data.rg,
+        },
+    })
+
+    response.json(user)
+})
+
 export default router
