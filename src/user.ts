@@ -54,6 +54,13 @@ router.post("/email", async (request: Request, response: Response) => {
     response.json(user)
 })
 
+router.post("/delete", async (request: Request, response: Response) => {
+    const data = request.body
+
+    const user = await prisma.users.delete({ where: { id: data.id } })
+    response.json(user)
+})
+
 router.post("/new", async (request: Request, response: Response) => {
     const data = request.body
 
