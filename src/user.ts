@@ -59,7 +59,7 @@ router.post("/new", async (request: Request, response: Response) => {
 
     const user = await prisma.users.create({
         data: {
-            birth: data.birth,
+            birth: new Date(data.birth),
             email: data.email,
             name: data.name,
             password: data.password,
