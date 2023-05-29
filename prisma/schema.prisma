@@ -32,6 +32,9 @@ model contracts {
     filename    String?
     signatures  String?   
     active      Boolean  @default(false)
+    archived    Boolean  @default(false)
+    reproved    Boolean  @default(false)
+    wrong       Boolean  @default(false)
     seller      users    @relation(fields: [seller_id], references: [id])
     seller_id   Int      
     rdstation   rdstation?
