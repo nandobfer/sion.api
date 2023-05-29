@@ -87,8 +87,9 @@ router.post("/new", async (request: Request, response: Response) => {
 router.post("/search", async (request: Request, response: Response) => {
     const data = request.body
 
-    const contracts = await prisma.contracts.findMany({
+    const contracts = await prisma.users.findMany({
         where: { name: { contains: data.search.trim() } },
+        include: { contracts: { include: { seller: true } } },
     })
 
     response.json(contracts)
