@@ -84,4 +84,14 @@ router.post("/new", async (request: Request, response: Response) => {
     response.json(user)
 })
 
+router.post("/search", async (request: Request, response: Response) => {
+    const data = request.body
+
+    const contracts = await prisma.contracts.findMany({
+        where: { name: { contains: data.search.trim() } },
+    })
+
+    response.json(contracts)
+})
+
 export default router
