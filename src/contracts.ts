@@ -27,6 +27,7 @@ router.post("/search", async (request: Request, response: Response) => {
 
     const contracts = await prisma.contracts.findMany({
         where: { name: { contains: data.search.trim() } },
+        include: { seller: true },
     })
 
     response.json(contracts)
