@@ -37,7 +37,7 @@ router.post("/archive", async (request: Request, response: Response) => {
     const data = request.body
 
     const contract = await prisma.contracts.update({
-        where: { id: data.id },
+        where: { id: Number(data.id) },
         data: {
             archived: true,
         },
@@ -50,7 +50,7 @@ router.post("/unarchive", async (request: Request, response: Response) => {
     const data = request.body
 
     const contract = await prisma.contracts.update({
-        where: { id: data.id },
+        where: { id: Number(data.id) },
         data: {
             archived: false,
         },
