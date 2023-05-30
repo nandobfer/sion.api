@@ -33,4 +33,30 @@ router.post("/search", async (request: Request, response: Response) => {
     response.json(contracts)
 })
 
+router.post("/archive", async (request: Request, response: Response) => {
+    const data = request.body
+
+    const contract = await prisma.contracts.update({
+        where: { id: data.id },
+        data: {
+            archived: true,
+        },
+    })
+
+    response.json(contract)
+})
+
+router.post("/unarchive", async (request: Request, response: Response) => {
+    const data = request.body
+
+    const contract = await prisma.contracts.update({
+        where: { id: data.id },
+        data: {
+            archived: false,
+        },
+    })
+
+    response.json(contract)
+})
+
 export default router
