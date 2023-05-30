@@ -57,6 +57,7 @@ router.post("/email", async (request: Request, response: Response) => {
 router.post("/delete", async (request: Request, response: Response) => {
     const data = request.body
 
+    const contracts = await prisma.contracts.updateMany({ where: { seller_id: data.id }, data: { seller_id: 2 } })
     const user = await prisma.users.delete({ where: { id: data.id } })
     response.json(user)
 })
