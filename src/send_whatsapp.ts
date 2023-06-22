@@ -9,7 +9,7 @@ router.post("/token", async (request: Request, response: Response) => {
     const number = `55${data.number}@c.us`
 
     const prefix = number.slice(2, 4)
-    const number2 = prefix + number.slice(5)
+    const number2 = `55${prefix + number.slice(5)}`
 
     const message = await whatsapp.sendMessage(number, `Token: ${data.token}`)
     const message2 = await whatsapp.sendMessage(number2, `Token: ${data.token}`)
