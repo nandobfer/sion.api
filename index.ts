@@ -7,6 +7,7 @@ import bodyParser from "body-parser"
 import cookieParser from "cookie-parser"
 import https from "https"
 import fs from "fs"
+import { whatsapp } from "./src/whatsapp"
 
 dotenv.config()
 
@@ -20,6 +21,7 @@ app.use(cookieParser())
 app.use(fileUpload())
 app.use("/api", router)
 app.use("/static", express.static("static"))
+whatsapp.initialize()
 
 try {
     const server = https.createServer(
