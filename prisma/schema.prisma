@@ -10,6 +10,7 @@ datasource db {
 model contracts {
     id          Int      @id @default(autoincrement())
     unit        String   @unique(map: "unit")
+    subunits    String?  @db.Text
     date        DateTime @db.Date
     ip          String
     pessoa      String   
