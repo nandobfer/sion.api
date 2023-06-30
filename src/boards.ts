@@ -28,8 +28,6 @@ router.post("/new", async (request: Request, response: Response) => {
             name: data.name,
             access: data.access,
             columns: data.columns,
-            inputColumn: data.inputColumn,
-            nextBoardId: data.nextBoardId,
         },
     })
 
