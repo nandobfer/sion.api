@@ -13,6 +13,7 @@ import { Server } from "socket.io"
 import { handleBoards } from "./src/io/boards"
 import { handleUsers } from "./src/io/users"
 import { handleStatuses } from "./src/io/statuses"
+import { handleContracts } from "./src/io/contracts"
 
 dotenv.config()
 
@@ -43,6 +44,7 @@ try {
         handleBoards(socket)
         handleUsers(socket)
         handleStatuses(socket)
+        handleContracts(socket)
     })
 
     server.listen(port, () => {
@@ -56,6 +58,7 @@ try {
         handleBoards(socket)
         handleUsers(socket)
         handleStatuses(socket)
+        handleContracts(socket)
     })
 
     server.listen(port, () => {
